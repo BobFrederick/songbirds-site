@@ -84,27 +84,58 @@ listForm.addEventListener('submit', event => {
 });
 
 const faces = document.querySelectorAll('.field-face');
+const sections = document.querySelectorAll('.hero, .jam, .discovery, .install');
+const artwork = document.querySelector('.warbler');
+const allowMotion = matchMedia('(prefers-reduced-motion: no-preference)');
 const canTrack = matchMedia('(any-pointer: fine) and (prefers-reduced-motion: no-preference)');
-let pointer, frame = 0;
-function look() {
+let pointer, frame = 0, scrollChanged = true;
+function parallax() {
+  const height = document.documentElement.clientHeight;
+  const scrollRange = Math.max(1, document.documentElement.scrollHeight - height);
+  const pagePhase = Math.max(0, Math.min(1, window.scrollY / scrollRange)) * 2 - 1;
+  const sectionPhases = Array.from(sections, section => {
+    const box = section.getBoundingClientRect();
+    return Math.max(-1, Math.min(1, (height - box.height - 2 * box.top) / (height + box.height)));
+  });
+  artwork.style.setProperty('--page-phase', pagePhase);
+  sections.forEach((section, i) => section.style.setProperty('--section-phase', sectionPhases[i]));
+}
+function updateScene() {
   frame = 0;
+  if (scrollChanged && allowMotion.matches) parallax();
+  scrollChanged = false;
+  if (!pointer) return;
   for (const face of faces) {
     const rect = face.getBoundingClientRect();
-    const dx = pointer ? pointer.x - (rect.left + rect.width / 2) : 0;
-    const dy = pointer ? pointer.y - (rect.top + rect.height / 2) : 0;
+    const dx = pointer.x - (rect.left + rect.width / 2);
+    const dy = pointer.y - (rect.top + rect.height / 2);
     const distance = Math.max(72, Math.hypot(dx, dy));
     face.style.setProperty('--look-x', (24 * dx / distance) + 'px');
     face.style.setProperty('--look-y', (21 * dy / distance) + 'px');
   }
 }
-function scheduleLook() { if (!frame) frame = requestAnimationFrame(look); }
-function reset() { pointer = null; scheduleLook(); }
+function scheduleScene() { if (!frame) frame = requestAnimationFrame(updateScene); }
+function scheduleParallax() {
+  scrollChanged = true;
+  if (allowMotion.matches) scheduleScene();
+}
+function reset() {
+  pointer = null;
+  for (const face of faces) {
+    face.style.removeProperty('--look-x');
+    face.style.removeProperty('--look-y');
+  }
+}
 document.addEventListener('pointermove', event => {
   if (!canTrack.matches || event.pointerType === 'touch') return;
   pointer = {x: event.clientX, y: event.clientY};
-  scheduleLook();
+  scheduleScene();
 }, {passive:true});
-document.addEventListener('scroll', () => { if (pointer) scheduleLook(); }, {passive:true});
+document.addEventListener('scroll', scheduleParallax, {passive:true});
+window.addEventListener('resize', scheduleParallax);
+window.addEventListener('pageshow', scheduleParallax);
+new ResizeObserver(scheduleParallax).observe(document.body);
+allowMotion.addEventListener('change', scheduleParallax);
 document.documentElement.addEventListener('pointerleave', reset);
 window.addEventListener('blur', reset);
 canTrack.addEventListener('change', reset);

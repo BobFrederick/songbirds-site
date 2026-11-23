@@ -10,9 +10,9 @@
   <meta property="og:description" content="Bring Spotify into Rhino without losing your flow. See what’s playing beside your model, whether you’re listening solo or with your team.">
   <meta property="og:image" content="https://bobfrederick.github.io/songbirds-site/assets/bay-breasted-warbler.webp">
   <link rel="icon" type="image/svg+xml" href="./assets/bird.svg">
-  <link rel="stylesheet" href="./style.css?v=1d3f1d3aa4">
+  <link rel="stylesheet" href="./style.css?v=682e7ead1b">
   <script type="module" src="./assets/hero.js"></script>
-  <script type="module" src="./assets/preview.js?v=498ba8bb74"></script>
+  <script type="module" src="./assets/preview.js?v=eae4103af3"></script>
 </head>
 <body>
   <div class="artwork" aria-hidden="true">
@@ -39,8 +39,8 @@
       <div class="jam shell">
         <svg class="field-face surprised" viewBox="0 0 400 400" aria-hidden="true" focusable="false"><use href="./assets/faces.svg#surprised-base"></use><use class="expression" href="./assets/faces.svg#surprised-expression"></use></svg>
         <svg class="field-face laughing" viewBox="0 0 400 400" aria-hidden="true" focusable="false"><use href="./assets/faces.svg#laughing-base"></use><use class="expression" href="./assets/faces.svg#laughing-expression"></use></svg>
-        <div><h2 id="jam-heading">Listen together</h2><p>Take turns picking the next song as you work. When a teammate’s track comes on, you can see who queued it, send a reaction, or save it for later.</p></div>
-        <figure class="player" aria-label="Example track in Songbirds">
+        <div><h2 id="jam-heading">Listen together</h2><p>See who’s listening as you work and take turns picking the next song. When a teammate’s track comes on, send a reaction or save it for later.</p></div>
+        <figure class="player" aria-label="Example Jam in Songbirds">
           <div class="music-stage" aria-hidden="true">
             <img class="avatar-moving" src="./assets/finch.svg" width="58" height="58" alt="">
             <span class="eq">
@@ -55,6 +55,33 @@
             </button>
             <button class="reaction-pill fire" type="button" aria-label="Fire reaction, 1 reaction" aria-pressed="false" disabled><span aria-hidden="true">🔥</span><span class="reaction-count">1</span></button>
           </div>
+          <section class="people" aria-labelledby="people-heading">
+            <div class="people-heading"><h3 id="people-heading">People</h3><span>4 present</span></div>
+            <dl class="people-groups">
+              <div>
+                <dt>Listeners</dt>
+                <dd>
+                  <svg class="room-avatar singing-ink avatar-moving" viewBox="0 0 400 400" aria-hidden="true"><use href="./assets/faces.svg#singing-base"></use><use class="features" href="./assets/faces.svg#singing-expression"></use></svg>
+                  <span><strong>Wren</strong><small>Lv. 2 · 140 XP</small></span>
+                </dd>
+                <dd>
+                  <svg class="room-avatar wink-ink" viewBox="0 0 400 400" aria-hidden="true"><use href="./assets/faces.svg#wink-base"></use><use class="features" href="./assets/faces.svg#wink-expression"></use></svg>
+                  <span><strong>Kai</strong><small>Lv. 1 · 65 XP</small></span>
+                </dd>
+              </div>
+              <div>
+                <dt>DJs</dt>
+                <dd>
+                  <img class="room-avatar avatar-moving" src="./assets/finch.svg" width="34" height="34" alt="">
+                  <span><strong>Bob</strong><small>Lv. 4 · 317 XP</small></span>
+                </dd>
+                <dd>
+                  <svg class="room-avatar finch-ink" viewBox="0 0 400 400" aria-hidden="true"><use href="./assets/faces.svg#smirk-base"></use><use class="features" href="./assets/faces.svg#smirk-expression"></use></svg>
+                  <span><strong>Finch</strong><small>Lv. 2 · 160 XP</small></span>
+                </dd>
+              </div>
+            </dl>
+          </section>
         </figure>
       </div>
     </section>

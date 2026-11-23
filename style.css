@@ -1,0 +1,95 @@
+* { box-sizing: border-box }
+:root {
+  --paper: #faf9f6;
+  --ink: #20221e;
+  --muted: #595b52;
+  --rule: #c8c9be;
+  --serif: Georgia, "Times New Roman", serif;
+  color-scheme: light;
+  font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+  color: var(--ink);
+  background: var(--paper);
+}
+body, figure, p, h1, h2 { margin: 0 }
+html { scroll-behavior: smooth }
+[id] { scroll-margin-top: 1.5rem }
+.shell { width: min(100% - 7vw, 78rem); margin-inline: auto }
+a { color: inherit; text-underline-offset: .24em }
+a:focus-visible, button:focus-visible, summary:focus-visible { outline: 2px solid currentColor; outline-offset: 5px }
+[hidden] { display: none !important }
+.skip { position: absolute; top: .5rem; left: .5rem; z-index: 5; padding: .75rem; background: white; transform: translateY(-170%) }
+.skip:focus { transform: none }
+.masthead, nav, .brand, figcaption, footer, .player-top { display: flex; align-items: center }
+.masthead, footer { justify-content: space-between }
+.masthead { min-height: 5rem; border-bottom: 1px solid var(--rule) }
+.brand { gap: .55rem; font-size: 1.35rem; font-weight: 640; letter-spacing: -.055em; text-decoration: none }
+nav { gap: 2rem }
+nav a { padding-block: .65rem; text-decoration: none; font-size: .94rem }
+nav a:hover { text-decoration: underline }
+.hero { background: var(--paper); isolation: isolate; position: relative; display: grid; grid-template-columns: 1.06fr 1fr; align-items: center; gap: 5%; padding: clamp(2rem, 4.2vw, 4.4rem) 1.5%; min-height: min(77vh, 52rem) }
+.flock-background { position: absolute; z-index: -1; inset: 0; pointer-events: none; overflow: hidden; mix-blend-mode: multiply; opacity: .65 }
+.flock-background canvas { width: 100%; height: 100%; position: absolute; inset: 0; display: block; filter: invert(1) }
+.hero-copy { padding: 1rem 0 2.5rem }
+.overline { font: 500 .88rem/1.4 "Segoe UI", sans-serif; letter-spacing: .10em; text-transform: uppercase; width: fit-content }
+h1, h2, .song { font-family: var(--serif); font-weight: 400 }
+h1 { width: fit-content; margin: 1.15rem 0 1.5rem; font-size: clamp(3.7rem, 7.4vw, 7.55rem); line-height: .98; letter-spacing: -.065em }
+h1 em { font-weight: 400 }
+.intro { max-width: 26rem; font-size: clamp(1.05rem, 1.5vw, 1.3rem); line-height: 1.5; color: #404339 }
+.primary { display: inline-block; padding: .85rem 1.35rem; margin-top: 1.6rem; background: var(--ink); color: white; font-weight: 600; text-decoration: none }
+.primary:hover { background: #3a3e36 }
+.primary:focus-visible { outline-color: var(--ink) }
+.plate img, .warbler img { display: block; width: 100%; height: auto }
+.plate { max-width: min(100%, 29rem); justify-self: center }
+figcaption { justify-content: space-between; gap: .7rem; margin-top: .65rem; color: var(--muted); font-size: .82rem; line-height: 1.4 }
+figcaption cite { font: italic 1rem/1.4 var(--serif); color: var(--ink) }
+.motion-control { position: absolute; left: 1.5%; bottom: 1.15rem; background: var(--paper); border: 0; padding: .45rem .25rem; color: var(--muted); font: inherit; font-size: .875rem; cursor: pointer; display: flex; align-items: center; gap: .45rem }
+.motion-control::before { content: ""; display: block; width: 4px; height: .65rem; border-left: 2px solid currentColor; border-right: 2px solid currentColor }
+.motion-control[aria-pressed="true"]::before { width: 0; height: 0; border: .28rem solid transparent; border-left: .43rem solid currentColor; border-right: 0 }
+.jam-band { border-block: 1px solid var(--rule); background: #eeeee7 }
+.jam, .install { display: grid; grid-template-columns: 1fr 1fr; gap: 9%; align-items: center; padding: clamp(2.75rem, 5vw, 5rem) 1.5% }
+h2 { font-size: clamp(2.35rem, 4.15vw, 4rem); line-height: 1.03; letter-spacing: -.055em }
+.jam h2 { margin-bottom: 1rem }
+.jam p:not(.song, .artist) { max-width: 29rem; line-height: 1.6; font-size: 1.05rem; color: #464941 }
+.player { width: 100%; max-width: 32rem; justify-self: end; background: #191a18; color: #faf9f6; padding: clamp(1.5rem, 3vw, 2.6rem) }
+.player-top { gap: .65rem; font-size: 1rem }
+.eq { display: inline-flex; align-items: center; gap: 3px; height: 24px; margin-left: auto; color: #f2c67c }
+.eq i { width: 3px; height: 5px; background: currentColor }
+.eq i:nth-child(even) { height: 14px }
+.eq i:nth-child(3), .eq i:nth-child(7) { height: 21px }
+.song { margin: 1.5rem 0 .35rem; font-size: clamp(1.8rem, 2.8vw, 2.8rem); letter-spacing: -.045em }
+.artist { color: #c4c5bb; font-size: .95rem }
+.install { padding-block: clamp(3.5rem, 8vw, 7rem); gap: 10% }
+.warbler { max-width: 25rem; justify-self: center }
+.requirements { color: var(--muted); margin-block: .8rem 1.5rem; font-size: .96rem }
+ol { padding: 0; margin: 0; list-style: none; counter-reset: step }
+li { counter-increment: step; border-top: 1px solid var(--rule); position: relative; padding: .9rem 0 .9rem 2.3rem; line-height: 1.5 }
+li::before { content: counter(step, decimal-leading-zero); position: absolute; left: 0; top: 1.1rem; font: .8rem/1.5 ui-monospace, monospace; color: var(--muted) }
+code { font: .92em ui-monospace, monospace }
+strong { font-weight: 650 }
+details { border-block: 1px solid var(--rule) }
+summary { padding: 1rem 0; list-style: none; cursor: pointer; font-weight: 600 }
+summary::-webkit-details-marker { display: none }
+summary::after { content: "+"; float: right; font: 1.3rem/1 sans-serif }
+details[open] summary::after { content: "−" }
+details p { padding-bottom: 1rem; color: var(--muted); line-height: 1.55 }
+footer { gap: 2rem; border-top: 1px solid var(--rule); padding-block: 1.6rem; color: var(--muted) }
+footer p { font-size: .85rem; line-height: 1.6; text-align: right }
+footer .brand { color: var(--ink); font-size: 1.1rem }
+@media (max-width: 720px) {
+  .shell { width: calc(100% - 2.5rem) }
+  .masthead { min-height: 4.15rem }
+  nav { gap: 1rem }
+  nav a { font-size: .875rem }
+  .hero, .jam, .install { grid-template-columns: 1fr; padding-inline: 0; gap: 1.8rem }
+  .hero { padding-block: 2.7rem 1.7rem }
+  .hero-copy { padding: 0 }
+  h1 { font-size: clamp(3.9rem, 12.5vw, 5.5rem); margin-block: 1rem }
+  .plate { width: 100%; max-width: 28rem; margin-top: .8rem }
+  .motion-control { position: static; justify-self: start; margin-top: -1rem }
+  .player { justify-self: start }
+  .install .guide { grid-row: 1 }
+  .warbler { width: min(100%, 23rem) }
+  footer { align-items: start; flex-direction: column; gap: .75rem }
+  footer p { text-align: left }
+}
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto } }

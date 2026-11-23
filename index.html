@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#faf9f6">
+  <title>Songbirds — Spotify Jams in Rhino</title>
+  <meta name="description" content="See who added each track to your team's Spotify Jam, right inside Rhino. Meet Songbirds and install the office pilot.">
+  <meta property="og:title" content="Songbirds — Who queued this song?">
+  <meta property="og:description" content="A shared listening companion for Rhino. See who picked the track and save the ones you love.">
+  <meta property="og:image" content="https://bobfrederick.github.io/songbirds-site/assets/blue-grosbeak-small.webp">
+  <link rel="icon" type="image/svg+xml" href="./assets/bird.svg">
+  <link rel="stylesheet" href="./style.css">
+  <script defer src="./assets/flock.js"></script>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="masthead shell">
+    <a class="brand" href="#main" aria-label="Songbirds home"><img src="./assets/bird.svg" width="30" height="30" alt="">Songbirds</a>
+    <nav aria-label="Page"><a href="#jam">Inside a Jam</a><a href="#install">Install guide</a></nav>
+  </header>
+  <main id="main">
+    <section class="hero shell" aria-labelledby="headline">
+      <div class="flock-background" aria-hidden="true"><canvas id="flock-gpu"></canvas><canvas id="flock-cpu" hidden></canvas></div>
+      <div class="hero-copy">
+        <p class="overline" data-flock-obstacle>Spotify Jams for Rhino</p>
+        <h1 id="headline" data-flock-obstacle>Who queued<br><em>this song?</em></h1>
+        <p class="intro" data-flock-obstacle>Songbirds shows who added the track to your team’s Spotify Jam, right inside Rhino.</p>
+        <a class="primary" href="#install" data-flock-obstacle>Install in Rhino</a>
+      </div>
+      <figure class="plate" data-flock-obstacle>
+        <img class="grosbeak" src="./assets/blue-grosbeak.webp" srcset="./assets/blue-grosbeak-small.webp 720w, ./assets/blue-grosbeak.webp 1400w" sizes="(max-width: 720px) 92vw, 43vw" width="1400" height="1728" fetchpriority="high" alt="Three grosbeaks perch on leafy branches around a nest.">
+        <figcaption><cite>Blue Grosbeak</cite><span>Audubon · 1831</span></figcaption>
+      </figure>
+      <button class="motion-control" type="button" aria-pressed="false" data-flock-obstacle hidden>Pause animation</button>
+    </section>
+    <section id="jam" class="jam-band" aria-labelledby="jam-heading">
+      <div class="jam shell">
+        <div><h2 id="jam-heading">Inside a Jam</h2><p>Queue a song in Spotify. When it plays, your teammates see your Songbirds name and face. React to a track or save it to Favorites.</p></div>
+        <figure class="player" aria-label="Example track in Songbirds">
+          <div class="player-top"><img src="./assets/finch.svg" width="38" height="38" alt=""><span><strong>Finch</strong> is spinning:</span><span class="eq" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span></div>
+          <p class="song">Surf <span>(feat. Gunna)</span></p><p class="artist">Young Thug, Gunna</p>
+        </figure>
+      </div>
+    </section>
+    <section class="install shell" id="install" aria-labelledby="install-heading">
+      <figure class="warbler"><img src="./assets/bay-breasted-warbler.webp" width="900" height="914" loading="lazy" alt="Two bay-breasted warblers among cotton leaves and pink blossoms."><figcaption><cite>Bay-breasted Warbler</cite><span>Audubon · 1829</span></figcaption></figure>
+      <div class="guide">
+        <h2 id="install-heading">Install in Rhino</h2>
+        <p class="requirements">Office pilot · Rhino 8.18 or later for Windows</p>
+        <ol>
+          <li>In Rhino, open <strong>Tools → Package Manager</strong> and select <strong>Online</strong>.</li>
+          <li>Enable <strong>Include pre-releases</strong>, search for <code>songbird</code>, and click <strong>Install</strong>.</li>
+          <li>Restart Rhino and run <code>Songbird</code>. Connect Spotify, then open <strong>Team</strong> and enter your team invite.</li>
+        </ol>
+        <details><summary>Can’t find Songbird?</summary><p>The office pilot uses a private package source. Ask your team owner for the source and setup instructions, then reopen Package Manager and search again.</p></details>
+      </div>
+    </section>
+  </main>
+  <footer class="shell"><span class="brand"><img src="./assets/bird.svg" width="24" height="24" alt="">Songbirds</span><p>Public-domain prints by Robert Havell Jr. after John James Audubon.<br><a href="https://www.nga.gov/artworks/32263-blue-grosbeak">National Gallery of Art</a> and <a href="https://www.metmuseum.org/art/collection/search/918293">The Metropolitan Museum of Art</a>.</p></footer>
+</body>
+</html>

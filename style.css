@@ -80,9 +80,8 @@ h2 { font-size: clamp(2rem, 4vw, 3.6rem); line-height: 1.08 }
 @keyframes equalize { from { transform: scaleY(.2) } to { transform: scaleY(1.1) } }
 .playback-caption { margin: 0 0 8px; font-size: 18px; line-height: 1.2; color: #bfc1cd }
 .playback-caption strong { color: #ededf0 }
-.track-preview { display: block; width: 100%; border: 0; border-radius: 12px }
+.track-preview { display: block; width: 100%; border: 0; border-radius: 12px; background-color: var(--paper); color-scheme: normal }
 .track-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin-top: 1rem }
-.track-link { margin-left: auto; font-size: .8rem; color: var(--muted) }
 .reaction-pill { display: inline-flex; align-items: center; gap: 6px; min-height: 30px; padding: 2px 9px; border: 1px solid #2c2c33; border-radius: 99px; background: #141418; color: #b5b5c0; font: inherit; font-size: 12px; cursor: pointer }
 .favorite svg { fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linejoin: round }
 .favorite[aria-pressed="true"] svg { fill: currentColor }

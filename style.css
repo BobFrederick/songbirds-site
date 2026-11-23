@@ -1,72 +1,84 @@
 * { box-sizing: border-box }
 :root {
-  --paper: #0b0b0c;
-  --ink: #f3f2ed;
-  --muted: #b1b1aa;
-  --rule: #343432;
-  --serif: Georgia, "Times New Roman", serif;
-  color-scheme: dark;
-  font-family: "Segoe UI", Helvetica, Arial, sans-serif;
-  color: var(--ink);
-  background: var(--paper);
+  --paper: #0b0b0c; --ink: #fafafa; --muted: #c0c0c6; --rule: #ffffff35;
+  color-scheme: dark; font-family: "Segoe UI Variable", "Segoe UI", sans-serif;
+  color: var(--ink); background: var(--paper); scroll-behavior: smooth;
 }
 body, figure, p, h1, h2 { margin: 0 }
-html { scroll-behavior: smooth }
+body { isolation: isolate; -webkit-font-smoothing: antialiased }
 [id] { scroll-margin-top: 1.5rem }
-.shell { width: min(100% - 7vw, 78rem); margin-inline: auto }
+.shell { width: min(calc(100% - 8vw), 76rem); margin-inline: auto }
 a { color: inherit; text-underline-offset: .24em }
-a:focus-visible, button:focus-visible, summary:focus-visible { outline: 2px solid currentColor; outline-offset: 5px }
+a:focus-visible, summary:focus-visible { outline: 2px solid currentColor; outline-offset: 5px }
 [hidden] { display: none !important }
+.artwork, .flock-background { position: fixed; inset: 0; overflow: hidden; pointer-events: none }
+.artwork { z-index: -2; background: var(--paper) }
+.artwork img, .flock-background canvas { position: absolute; inset: 0; display: block; width: 100%; height: 100% }
+.artwork img { object-fit: cover }
+.grosbeak { object-position: 50% 18% }
+.warbler { object-position: 50% 45%; opacity: var(--warbler, 0) }
+.artwork::after { content: ""; position: absolute; inset: 0; background: linear-gradient(100deg, rgb(7 8 10 / 88%) 0%, rgb(9 10 12 / 73%) 54%, rgb(10 11 13 / 66%) 100%) }
+.flock-background { z-index: -1; mix-blend-mode: screen; opacity: .72 }
 .skip { position: absolute; top: .5rem; left: .5rem; z-index: 5; padding: .75rem; background: var(--paper); transform: translateY(-170%) }
 .skip:focus { transform: none }
-.masthead, nav, .brand, figcaption, footer, .player-top { display: flex; align-items: center }
-.masthead, footer { justify-content: space-between }
+.masthead, nav, .brand, footer, .music-stage { display: flex; align-items: center }
+.masthead, footer, .music-stage { justify-content: space-between }
 .masthead { min-height: 5rem; border-bottom: 1px solid var(--rule) }
-.brand { gap: .55rem; font-size: 1.35rem; font-weight: 640; letter-spacing: -.055em; text-decoration: none }
+.brand { gap: .55rem; font-size: 1.3rem; font-weight: 600; letter-spacing: -.04em; text-decoration: none }
 nav { gap: 2rem }
 nav a { padding-block: .65rem; text-decoration: none; font-size: .94rem }
 nav a:hover { text-decoration: underline }
-.hero { background: var(--paper); isolation: isolate; position: relative; display: grid; grid-template-columns: 1.06fr 1fr; align-items: center; gap: 5%; padding: clamp(2rem, 4.2vw, 4.4rem) 1.5%; min-height: min(77vh, 52rem) }
-.flock-background { position: absolute; z-index: -1; inset: 0; pointer-events: none; overflow: hidden; mix-blend-mode: screen; opacity: .7 }
-.flock-background canvas { width: 100%; height: 100%; position: absolute; inset: 0; display: block;  }
-.hero-copy { padding: 1rem 0 2.5rem }
-.overline { font: 500 .88rem/1.4 "Segoe UI", sans-serif; letter-spacing: .10em; text-transform: uppercase; width: fit-content }
-h1, h2, .song { font-family: var(--serif); font-weight: 400 }
-h1 { width: fit-content; margin: 1.15rem 0 1.5rem; font-size: clamp(3.7rem, 7.4vw, 7.55rem); line-height: .98; letter-spacing: -.065em }
-h1 em { font-weight: 400 }
-.intro { max-width: 26rem; font-size: clamp(1.05rem, 1.5vw, 1.3rem); line-height: 1.5; color: #c5c4bd }
-.primary { display: inline-block; padding: .85rem 1.35rem; margin-top: 1.6rem; background: var(--ink); color: var(--paper); font-weight: 600; text-decoration: none }
-.primary:hover { background: #d5d4cd }
+.hero, .jam, .install { position: relative }
+.hero { display: grid; align-items: center; min-height: 77svh; padding-block: clamp(4.5rem, 7vw, 7rem) }
+.hero-copy { max-width: 42rem }
+.overline { font-size: 1rem; font-weight: 500; color: #e0e0df; width: fit-content }
+h1, h2 { font-weight: 600; letter-spacing: -.05em }
+h1 { width: fit-content; margin: .9rem 0 1.5rem; font-size: clamp(3.65rem, 7.75vw, 7.25rem); line-height: 1 }
+.intro { max-width: 28rem; font-size: clamp(1.05rem, 1.55vw, 1.32rem); line-height: 1.55; color: #dededf }
+.primary { display: inline-block; padding: .85rem 1.35rem; margin-top: 1.65rem; background: var(--ink); color: var(--paper); font-weight: 600; text-decoration: none }
+.primary:hover { background: #d8d8d8 }
 .primary:focus-visible { outline-color: var(--ink) }
-.plate img, .warbler img { display: block; width: 100%; height: auto }
-.plate { max-width: min(100%, 29rem); justify-self: center }
-figcaption { justify-content: space-between; gap: .7rem; margin-top: .65rem; color: var(--muted); font-size: .82rem; line-height: 1.4 }
-figcaption cite { font: italic 1rem/1.4 var(--serif); color: var(--ink) }
-.jam-band { border-block: 1px solid var(--rule); background: #141415 }
-.jam, .install { display: grid; grid-template-columns: 1fr 1fr; gap: 9%; align-items: center; padding: clamp(2.75rem, 5vw, 5rem) 1.5% }
-h2 { font-size: clamp(2.35rem, 4.15vw, 4rem); line-height: 1.03; letter-spacing: -.055em }
+.jam-band { border-block: 1px solid var(--rule) }
+.jam, .install { display: grid; grid-template-columns: 1fr 1fr; gap: 8%; align-items: center; padding-block: clamp(4rem, 7vw, 7rem) }
+h2 { font-size: clamp(2rem, 4vw, 3.6rem); line-height: 1.08 }
 .jam h2 { margin-bottom: 1rem }
-.jam p:not(.song, .artist) { max-width: 29rem; line-height: 1.6; font-size: 1.05rem; color: #c6c6bf }
-.player { width: 100%; max-width: 32rem; justify-self: end; border: 1px solid var(--rule); background: #0d0d0e; color: #faf9f6; padding: clamp(1.5rem, 3vw, 2.6rem) }
-.player-top { gap: .65rem; font-size: 1rem }
-.eq { display: inline-flex; align-items: center; gap: 3px; height: 24px; margin-left: auto; color: #f2c67c }
-.eq i { width: 3px; height: 5px; background: currentColor }
-.eq i:nth-child(even) { height: 14px }
-.eq i:nth-child(3), .eq i:nth-child(7) { height: 21px }
-.song { margin: 1.5rem 0 .35rem; font-size: clamp(1.8rem, 2.8vw, 2.8rem); letter-spacing: -.045em }
-.artist { color: #c4c5bb; font-size: .95rem }
-.install { padding-block: clamp(3.5rem, 8vw, 7rem); gap: 10% }
-.warbler { max-width: 25rem; justify-self: center }
+.jam h2 + p { max-width: 29rem; line-height: 1.6; font-size: 1.07rem; color: #dededf }
+.player { width: 100%; max-width: 32.5rem; justify-self: end; border: 1px solid #323238; background: #0b0b0c; color: #fafafa; padding: 1rem clamp(1.25rem, 3vw, 2rem) 2rem }
+.music-stage { height: 122px; padding: 16px 8px }
+.avatar-moving { transform-origin: 50% 100%; animation: bob 1.15s ease-in-out infinite }
+@keyframes bob { 0%,100% { transform: translateY(0) scale(1.03,.96) } 50% { transform: translateY(-6px) scale(.97,1.04) } }
+.eq { display: flex; align-items: center; gap: 4px; height: 48px; margin-right: 5px; color: #f2c67c }
+.eq i { display: block; width: 4px; height: 31px; border-radius: 3px; background: currentColor; opacity: .65; animation: equalize .65s ease-in-out infinite alternate; animation-delay: calc(var(--i) * -.12s) }
+.eq i:nth-child(4n+2) { animation-duration: .78s }
+.eq i:nth-child(4n+3) { animation-duration: .91s }
+.eq i:nth-child(4n) { height: 17px; animation-duration: 1.04s }
+.eq i:nth-child(3n) { opacity: .23 }
+@keyframes equalize { from { transform: scaleY(.2) } to { transform: scaleY(1.1) } }
+.playback-caption { margin: 0 0 8px; font-size: 18px; line-height: 1.2; color: #bfc1cd }
+.playback-caption strong { color: #ededf0 }
+.song { font-size: clamp(23px, 6vw, 31px); font-weight: 600; line-height: 1.17; letter-spacing: -.045em }
+.artist { margin-top: 7px; font-size: 13px; color: #8e8e99 }
+.reaction-pill { display: inline-flex; align-items: center; gap: 6px; margin-top: 16px; min-height: 30px; padding: 2px 9px; border: 1px solid #2c2c33; border-radius: 99px; background: #141418; color: #b5b5c0; font: inherit; font-size: 12px; cursor: pointer }
+.reaction-pill span:first-child { font-size: 16px }
+.reaction-pill[aria-pressed="true"] { border-color: #826c49; background: #332b20; color: #f2c67c }
+.reaction-pill:focus-visible { outline: 2px solid #f2c67c; outline-offset: 3px }
+.field-face { position: absolute; width: var(--size); height: var(--size); fill: var(--face-color); pointer-events: none }
+.field-face .expression { fill: #1b1b1e; transform-box: view-box; transform: translate(var(--look-x, 0px), var(--look-y, 0px)); transition: transform 100ms ease-out }
+.wink { --face-color: #8edacf; --size: 42px; right: 19%; top: 38%; rotate: -10deg }
+.surprised { --face-color: #e8adbb; --size: 30px; top: 1.25rem; left: 42%; rotate: 7deg }
+.singing { --face-color: #bfb2eb; --size: 46px; left: 17%; top: 45%; rotate: -6deg }
+.install { min-height: 66svh }
+.guide { grid-column: 2 }
 .requirements { color: var(--muted); margin-block: .8rem 1.5rem; font-size: .96rem }
 ol { padding: 0; margin: 0; list-style: none; counter-reset: step }
 li { counter-increment: step; border-top: 1px solid var(--rule); position: relative; padding: .9rem 0 .9rem 2.3rem; line-height: 1.5 }
-li::before { content: counter(step, decimal-leading-zero); position: absolute; left: 0; top: 1.1rem; font: .8rem/1.5 ui-monospace, monospace; color: var(--muted) }
-code { font: .92em ui-monospace, monospace }
-strong { font-weight: 650 }
+li::before { content: counter(step, decimal-leading-zero); position: absolute; left: 0; top: 1.1rem; font-size: .82rem; font-variant-numeric: tabular-nums; color: var(--muted) }
+code { font: inherit; font-weight: 600 }
+strong { font-weight: 600 }
 details { border-block: 1px solid var(--rule) }
 summary { padding: 1rem 0; list-style: none; cursor: pointer; font-weight: 600 }
 summary::-webkit-details-marker { display: none }
-summary::after { content: "+"; float: right; font: 1.3rem/1 sans-serif }
+summary::after { content: "+"; float: right; font-size: 1.3rem; line-height: 1 }
 details[open] summary::after { content: "−" }
 details p { padding-bottom: 1rem; color: var(--muted); line-height: 1.55 }
 footer { gap: 2rem; border-top: 1px solid var(--rule); padding-block: 1.6rem; color: var(--muted) }
@@ -77,15 +89,18 @@ footer .brand { color: var(--ink); font-size: 1.1rem }
   .masthead { min-height: 4.15rem }
   nav { gap: 1rem }
   nav a { font-size: .875rem }
-  .hero, .jam, .install { grid-template-columns: 1fr; padding-inline: 0; gap: 1.8rem }
-  .hero { padding-block: 2.7rem 1.7rem }
-  .hero-copy { padding: 0 }
-  h1 { font-size: clamp(3.9rem, 12.5vw, 5.5rem); margin-block: 1rem }
-  .plate { width: 100%; max-width: 28rem; margin-top: .8rem }
+  .hero { min-height: 76svh; padding-block: 4rem 6rem }
+  .jam, .install { grid-template-columns: 1fr; gap: 1.8rem; padding-block: 4.75rem }
+  .guide { grid-column: 1 }
   .player { justify-self: start }
-  .install .guide { grid-row: 1 }
-  .warbler { width: min(100%, 23rem) }
+  .wink { top: auto; bottom: 1.75rem; right: 9%; --size: 34px }
+  .surprised { left: auto; right: 6%; top: 1.1rem }
+  .singing { left: auto; right: 12%; top: 1.2rem; --size: 32px }
   footer { align-items: start; flex-direction: column; gap: .75rem }
   footer p { text-align: left }
 }
-@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto } }
+@media (prefers-reduced-motion: reduce) {
+  :root { scroll-behavior: auto }
+  .avatar-moving, .eq i { animation: none }
+  .field-face .expression { transition: none; transform: none }
+}

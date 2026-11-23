@@ -12,8 +12,14 @@
   <link rel="icon" type="image/svg+xml" href="./assets/bird.svg">
   <link rel="stylesheet" href="./style.css">
   <script type="module" src="./assets/hero.js"></script>
+  <script type="module" src="./assets/preview.js"></script>
 </head>
 <body>
+  <div class="artwork" aria-hidden="true">
+    <img class="grosbeak" src="./assets/blue-grosbeak.webp" srcset="./assets/blue-grosbeak-small.webp 720w, ./assets/blue-grosbeak.webp 1400w" sizes="100vw" fetchpriority="high" alt="">
+    <img class="warbler" src="./assets/bay-breasted-warbler.webp" alt="">
+  </div>
+  <div class="flock-background" aria-hidden="true"><canvas id="flock-gpu"></canvas><canvas id="flock-cpu" hidden></canvas></div>
   <a class="skip" href="#main">Skip to content</a>
   <header class="masthead shell">
     <a class="brand" href="#main" aria-label="Songbirds home"><img src="./assets/bird.svg" width="30" height="30" alt="">Songbirds</a>
@@ -21,29 +27,33 @@
   </header>
   <main id="main">
     <section class="hero shell" aria-labelledby="headline">
-      <div class="flock-background" aria-hidden="true"><canvas id="flock-gpu"></canvas><canvas id="flock-cpu" hidden></canvas></div>
       <div class="hero-copy">
         <p class="overline" data-flock-text>Spotify in Rhino</p>
-        <h1 id="headline" data-flock-text>Stay in your<br><em>flow state.</em></h1>
+        <h1 id="headline" data-flock-text>Stay in your<br>flow state.</h1>
         <p class="intro" data-flock-text>Glance at the song and artist beside your Rhino model, then keep designing without switching apps. Listen solo or share a queue with your team.</p>
         <a class="primary" href="#install" data-flock-text>Install in Rhino</a>
       </div>
-      <figure class="plate">
-        <img class="grosbeak" src="./assets/blue-grosbeak.webp" srcset="./assets/blue-grosbeak-small.webp 720w, ./assets/blue-grosbeak.webp 1400w" sizes="(max-width: 720px) 92vw, 43vw" width="1400" height="1728" fetchpriority="high" alt="Three grosbeaks perch on leafy branches around a nest.">
-        <figcaption data-flock-text><cite>Blue Grosbeak</cite><span>Audubon · 1831</span></figcaption>
-      </figure>
+      <svg class="field-face wink" viewBox="0 0 400 400" aria-hidden="true" focusable="false"><use href="./assets/faces.svg#wink-base"></use><use class="expression" href="./assets/faces.svg#wink-expression"></use></svg>
     </section>
     <section id="jam" class="jam-band" aria-labelledby="jam-heading">
       <div class="jam shell">
+        <svg class="field-face surprised" viewBox="0 0 400 400" aria-hidden="true" focusable="false"><use href="./assets/faces.svg#surprised-base"></use><use class="expression" href="./assets/faces.svg#surprised-expression"></use></svg>
         <div><h2 id="jam-heading">Listen together</h2><p>Take turns picking the next song as you work. When a teammate’s track comes on, you can see who queued it, send a reaction, or save it for later.</p></div>
         <figure class="player" aria-label="Example track in Songbirds">
-          <div class="player-top"><img src="./assets/finch.svg" width="38" height="38" alt=""><span><strong>Finch</strong> is spinning:</span><span class="eq" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span></div>
+          <div class="music-stage" aria-hidden="true">
+            <img class="avatar-moving" src="./assets/finch.svg" width="58" height="58" alt="">
+            <span class="eq">
+              <i style="--i:0"></i><i style="--i:1"></i><i style="--i:2"></i><i style="--i:3"></i><i style="--i:4"></i><i style="--i:5"></i><i style="--i:6"></i><i style="--i:7"></i><i style="--i:8"></i><i style="--i:9"></i><i style="--i:10"></i><i style="--i:11"></i><i style="--i:12"></i><i style="--i:13"></i><i style="--i:14"></i><i style="--i:15"></i><i style="--i:16"></i>
+            </span>
+          </div>
+          <p class="playback-caption"><strong>Bob</strong> is spinning:</p>
           <p class="song">Surf <span>(feat. Gunna)</span></p><p class="artist">Young Thug, Gunna</p>
+          <button class="reaction-pill" type="button" aria-label="Fire reaction, 1 reaction" aria-pressed="false" disabled><span aria-hidden="true">🔥</span><span class="reaction-count">1</span></button>
         </figure>
       </div>
     </section>
     <section class="install shell" id="install" aria-labelledby="install-heading">
-      <figure class="warbler"><img src="./assets/bay-breasted-warbler.webp" width="900" height="914" loading="lazy" alt="Two bay-breasted warblers among cotton leaves and pink blossoms."><figcaption><cite>Bay-breasted Warbler</cite><span>Audubon · 1829</span></figcaption></figure>
+      <svg class="field-face singing" viewBox="0 0 400 400" aria-hidden="true" focusable="false"><use href="./assets/faces.svg#singing-base"></use><use class="expression" href="./assets/faces.svg#singing-expression"></use></svg>
       <div class="guide">
         <h2 id="install-heading">Install in Rhino</h2>
         <p class="requirements">Office pilot · Rhino 8.18 or later for Windows</p>
@@ -56,6 +66,6 @@
       </div>
     </section>
   </main>
-  <footer class="shell"><span class="brand"><img src="./assets/bird.svg" width="24" height="24" alt="">Songbirds</span><p>Public-domain prints by Robert Havell Jr. after John James Audubon.<br><a href="https://www.nga.gov/artworks/32263-blue-grosbeak">National Gallery of Art</a> and <a href="https://www.metmuseum.org/art/collection/search/918293">The Metropolitan Museum of Art</a>.</p></footer>
+  <footer class="shell"><span class="brand"><img src="./assets/bird.svg" width="24" height="24" alt="">Songbirds</span><p>Public-domain prints by Robert Havell Jr. after John James Audubon.<br><a href="https://www.nga.gov/artworks/32263-blue-grosbeak">Blue Grosbeak, National Gallery of Art</a> · <a href="https://www.metmuseum.org/art/collection/search/918293">Bay-breasted Warbler, The Met</a></p></footer>
 </body>
 </html>

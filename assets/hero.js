@@ -7,8 +7,6 @@ const gpu = layer.querySelector('#flock-gpu');
 const cpu = layer.querySelector('#flock-cpu');
 const media = matchMedia('(prefers-reduced-motion: reduce)');
 const labels = document.querySelectorAll('[data-flock-text], header a, .jam h2, .jam h2 + p, .guide h2, .requirements, li, summary, details p, footer .brand, footer p');
-const artwork = document.querySelector('.artwork');
-const jam = document.querySelector('#jam');
 let renderer = webglFlockRenderer(gpu);
 function fallback() {
   renderer?.dispose();
@@ -23,8 +21,6 @@ let scrollTop = window.scrollY, textFields = [], visibleFields = [];
 function scrolled() {
   scrollTop = window.scrollY;
   visibleFields = textFields.filter(box => box.bottom >= scrollTop && box.top <= scrollTop + innerHeight);
-  const blend = Math.min(1, Math.max(0, (.68 * innerHeight - jam.getBoundingClientRect().top) / (.6 * innerHeight)));
-  artwork.style.setProperty('--warbler', media.matches ? Math.round(blend) : blend);
   schedule();
 }
 

@@ -8,7 +8,7 @@
   <meta name="description" content="Bring Spotify into Rhino without losing your flow. See what’s playing beside your model, whether you’re listening solo or with your team.">
   <meta property="og:title" content="Songbirds — Stay in your flow state in Rhino">
   <meta property="og:description" content="Bring Spotify into Rhino without losing your flow. See what’s playing beside your model, whether you’re listening solo or with your team.">
-  <meta property="og:image" content="https://bobfrederick.github.io/songbirds-site/assets/blue-grosbeak-small.webp">
+  <meta property="og:image" content="https://bobfrederick.github.io/songbirds-site/assets/bay-breasted-warbler.webp">
   <link rel="icon" type="image/svg+xml" href="./assets/bird.svg">
   <link rel="stylesheet" href="./style.css">
   <script type="module" src="./assets/hero.js"></script>
@@ -16,14 +16,13 @@
 </head>
 <body>
   <div class="artwork" aria-hidden="true">
-    <img class="grosbeak" src="./assets/blue-grosbeak.webp" srcset="./assets/blue-grosbeak-small.webp 720w, ./assets/blue-grosbeak.webp 1400w" sizes="100vw" fetchpriority="high" alt="">
-    <img class="warbler" src="./assets/bay-breasted-warbler.webp" alt="">
+    <img class="warbler" src="./assets/bay-breasted-warbler.webp" fetchpriority="high" alt="">
   </div>
   <div class="flock-background" aria-hidden="true"><canvas id="flock-gpu"></canvas><canvas id="flock-cpu" hidden></canvas></div>
   <a class="skip" href="#main">Skip to content</a>
   <header class="masthead shell">
     <a class="brand" href="#main" aria-label="Songbirds home"><img src="./assets/bird.svg" width="30" height="30" alt="">Songbirds</a>
-    <nav aria-label="Page"><a href="#jam">Listen together</a><a href="#install">Install guide</a></nav>
+    <nav aria-label="Page"><a href="#discover">Explore Jams</a><a href="#install">Install guide</a></nav>
   </header>
   <main id="main">
     <section class="hero shell" aria-labelledby="headline">
@@ -34,10 +33,12 @@
         <a class="primary" href="#install" data-flock-text>Install in Rhino</a>
       </div>
       <svg class="field-face wink" viewBox="0 0 400 400" aria-hidden="true" focusable="false"><use href="./assets/faces.svg#wink-base"></use><use class="expression" href="./assets/faces.svg#wink-expression"></use></svg>
+      <svg class="field-face smirk" viewBox="0 0 400 400" aria-hidden="true" focusable="false"><use href="./assets/faces.svg#smirk-base"></use><use class="expression" href="./assets/faces.svg#smirk-expression"></use></svg>
     </section>
-    <section id="jam" class="jam-band" aria-labelledby="jam-heading">
+    <section id="jam" aria-labelledby="jam-heading">
       <div class="jam shell">
         <svg class="field-face surprised" viewBox="0 0 400 400" aria-hidden="true" focusable="false"><use href="./assets/faces.svg#surprised-base"></use><use class="expression" href="./assets/faces.svg#surprised-expression"></use></svg>
+        <svg class="field-face laughing" viewBox="0 0 400 400" aria-hidden="true" focusable="false"><use href="./assets/faces.svg#laughing-base"></use><use class="expression" href="./assets/faces.svg#laughing-expression"></use></svg>
         <div><h2 id="jam-heading">Listen together</h2><p>Take turns picking the next song as you work. When a teammate’s track comes on, you can see who queued it, send a reaction, or save it for later.</p></div>
         <figure class="player" aria-label="Example track in Songbirds">
           <div class="music-stage" aria-hidden="true">
@@ -52,8 +53,45 @@
         </figure>
       </div>
     </section>
+    <section class="discovery shell" id="discover" aria-labelledby="create-heading find-heading">
+      <svg class="field-face content" viewBox="0 0 400 400" aria-hidden="true" focusable="false"><use href="./assets/faces.svg#content-base"></use><use class="expression" href="./assets/faces.svg#content-expression"></use></svg>
+      <div class="discovery-copy">
+        <h2 id="create-heading" data-flock-text>Create a Jam</h2>
+        <p data-flock-text>Start a Jam in Spotify and list it for your team in Songbirds. Put on a record you love and let someone else pick the next track.</p>
+        <h2 id="find-heading" data-flock-text>Find a Jam</h2>
+        <p data-flock-text>See what’s playing across the studio. Drop into a teammate’s jazz session or follow a beat into a genre you’ve never tried.</p>
+      </div>
+      <div class="lobby" aria-label="Jam lobby preview" role="group">
+        <div class="lobby-heading"><h3>Active Jams</h3><span>Lobby preview</span></div>
+        <div class="rooms">
+            <div class="room" role="group" aria-label="Blue hour">
+              <svg class="room-avatar singing-ink" viewBox="0 0 400 400" aria-hidden="true"><use href="./assets/faces.svg#singing-base"></use><use class="features" href="./assets/faces.svg#singing-expression"></use></svg>
+              <div class="room-info"><strong class="room-name">Blue hour</strong><small>Maya · Jazz</small><p>Footprints <span>· Wayne Shorter</span></p></div>
+              <button class="room-action" type="button" hidden>Join</button>
+            </div>
+            <div class="room" role="group" aria-label="Drum machines">
+              <svg class="room-avatar wink-ink" viewBox="0 0 400 400" aria-hidden="true"><use href="./assets/faces.svg#wink-base"></use><use class="features" href="./assets/faces.svg#wink-expression"></use></svg>
+              <div class="room-info"><strong class="room-name">Drum machines</strong><small>Jules · Electronic</small><p>Two Thousand Seventeen <span>· Four Tet</span></p></div>
+              <button class="room-action" type="button" hidden>Join</button>
+            </div>
+            <div class="room" role="group" aria-label="Desk rotation">
+              <svg class="room-avatar laughing-ink" viewBox="0 0 400 400" aria-hidden="true"><use href="./assets/faces.svg#laughing-base"></use><use class="features" href="./assets/faces.svg#laughing-expression"></use></svg>
+              <div class="room-info"><strong class="room-name">Desk rotation</strong><small>Bob · Hip-hop</small><p>Surf (feat. Gunna) <span>· Young Thug</span></p></div>
+              <button class="room-action" type="button" hidden>Join</button>
+            </div>
+        </div>
+        <button class="list-toggle" type="button" aria-expanded="false" aria-controls="list-form" hidden>List your Jam</button>
+        <form id="list-form" hidden>
+          <label for="room-name">Jam name</label>
+          <input id="room-name" maxlength="60" required autocomplete="off" placeholder="Your studio mix">
+          <button class="room-action" type="submit">List Jam</button>
+        </form>
+        <div class="lobby-status" role="status"></div>
+      </div>
+    </section>
     <section class="install shell" id="install" aria-labelledby="install-heading">
       <svg class="field-face singing" viewBox="0 0 400 400" aria-hidden="true" focusable="false"><use href="./assets/faces.svg#singing-base"></use><use class="expression" href="./assets/faces.svg#singing-expression"></use></svg>
+      <svg class="field-face sunglasses" viewBox="0 0 400 400" aria-hidden="true" focusable="false"><use href="./assets/faces.svg#sunglasses-base"></use><use class="expression" href="./assets/faces.svg#sunglasses-expression"></use></svg>
       <div class="guide">
         <h2 id="install-heading">Install in Rhino</h2>
         <p class="requirements">Office pilot · Rhino 8.18 or later for Windows</p>
@@ -66,6 +104,6 @@
       </div>
     </section>
   </main>
-  <footer class="shell"><span class="brand"><img src="./assets/bird.svg" width="24" height="24" alt="">Songbirds</span><p>Public-domain prints by Robert Havell Jr. after John James Audubon.<br><a href="https://www.nga.gov/artworks/32263-blue-grosbeak">Blue Grosbeak, National Gallery of Art</a> · <a href="https://www.metmuseum.org/art/collection/search/918293">Bay-breasted Warbler, The Met</a></p></footer>
+  <footer class="shell"><span class="brand"><img src="./assets/bird.svg" width="24" height="24" alt="">Songbirds</span><p>Robert Havell Jr. after John James Audubon.<br><a href="https://www.metmuseum.org/art/collection/search/918293">Bay-breasted Warbler, The Met · Public domain</a></p></footer>
 </body>
 </html>

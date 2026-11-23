@@ -13,10 +13,10 @@ void main(){
   vec2 normal=vec2(-direction.y,direction.x);
   float velocity=clamp((speed-24.0)/58.0,0.0,1.0);
   float stroke=mix(4.0,10.5,velocity)+variation*1.5;
-  vec2 pixel=state.xy+direction*corner.x*stroke*0.5+normal*corner.y*0.7;
+  vec2 pixel=state.xy+direction*corner.x*stroke*0.5+normal*corner.y*0.88;
   gl_Position=vec4(pixel/viewport*vec2(2.0,-2.0)+vec2(-1.0,1.0),0.0,1.0);
   local=corner;
-  brightness=0.32+velocity*0.34+variation*0.12;
+  brightness=0.48+velocity*0.34+variation*0.14;
 }`;
 const fragment = `#version 300 es
 precision highp float;
@@ -26,7 +26,7 @@ out vec4 color;
 void main(){
   float edge=1.0-smoothstep(0.25,1.0,abs(local.y));
   float tip=1.0-smoothstep(0.78,1.0,abs(local.x));
-  color=vec4(vec3(0.82),edge*tip*brightness);
+  color=vec4(vec3(0.95),edge*tip*brightness);
 }`;
 export function webglFlockRenderer(canvas) {
 	let gl = null;
@@ -120,11 +120,11 @@ export function canvasFlockRenderer(canvas) {
 			context.setTransform(canvas.width / flock.width, 0, 0, canvas.height / flock.height, 0, 0);
 			context.fillStyle = "#000";
 			context.fillRect(0, 0, flock.width, flock.height);
-			context.lineWidth = .85;
+			context.lineWidth = 1.1;
 			context.lineCap = "round";
 			// Four batches preserve speed variation without 1,200 individual stroke calls.
 			for (let band = 0; band < 4; band++) {
-				context.strokeStyle = `rgba(209,209,209,${.32 + band * .12})`;
+				context.strokeStyle = `rgba(244,244,242,${.48 + band * .12})`;
 				context.beginPath();
 				for (let i = 0; i < flock.count; i++) {
 					const speed = Math.hypot(flock.vx[i], flock.vy[i]), velocity = Math.max(0, Math.min(1, (speed - 24) / 58));

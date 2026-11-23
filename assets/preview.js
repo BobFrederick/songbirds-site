@@ -1,4 +1,12 @@
-const reaction = document.querySelector('.reaction-pill');
+const favorite = document.querySelector('.favorite');
+favorite.disabled = false;
+favorite.addEventListener('click', () => {
+  const selected = favorite.getAttribute('aria-pressed') !== 'true';
+  favorite.setAttribute('aria-pressed', String(selected));
+  favorite.querySelector('.favorite-count').textContent = selected ? '1' : '0';
+});
+
+const reaction = document.querySelector('.fire');
 const count = reaction.querySelector('.reaction-count');
 reaction.disabled = false;
 reaction.addEventListener('click', () => {

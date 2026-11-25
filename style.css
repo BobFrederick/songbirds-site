@@ -118,7 +118,8 @@ h2 { font-size: clamp(2rem, 4vw, 3.6rem); line-height: 1.08 }
 .profile-connection { display: grid; place-items: center; width: 34px; height: 34px; border: 1px solid #2b2b30; border-radius: 8px; background: #18181d; color: #f5f5f7 }
 .finch-ink { fill: #efb38e }
 .field-face { position: absolute; width: var(--size); height: var(--size); fill: var(--face-color); pointer-events: none }
-.field-face .expression { fill: #1b1b1e; transform-box: view-box; transform: translate(var(--look-x, 0px), var(--look-y, 0px)); transition: transform 100ms ease-out }
+.field-face .expression { fill: #1b1b1e; transform-box: view-box; transform: translate(var(--look-x, 0px), var(--look-y, 0px)); transition: transform 260ms ease-out }
+.field-face[data-cursor-near] .expression { transition-duration: 100ms }
 .wink { --face-color: #8edacf; --size: 86px; --travel: -1; right: 19%; top: 32%; rotate: -10deg }
 .smirk { --face-color: #efb38e; --size: 67px; --travel: .7; right: 7%; bottom: 14%; rotate: 9deg }
 .surprised { --face-color: #e8adbb; --size: 62px; --travel: .5; top: .6rem; left: 42%; rotate: 7deg }

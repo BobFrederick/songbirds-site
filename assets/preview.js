@@ -89,12 +89,40 @@ listForm.addEventListener('submit', event => {
   lobbyStatus.textContent = `${name} is listed in this preview.`;
 });
 
-const faces = document.querySelectorAll('.field-face');
+const faces = Array.from(document.querySelectorAll('.field-face'), element => ({element, glance: null, timer: 0}));
 const sections = document.querySelectorAll('.hero, .jam, .discovery, .install');
 const artwork = document.querySelector('.warbler');
 const allowMotion = matchMedia('(prefers-reduced-motion: no-preference)');
 const canTrack = matchMedia('(any-pointer: fine) and (prefers-reduced-motion: no-preference)');
 let pointer, frame = 0, scrollChanged = true;
+const randomBetween = (min, max) => min + Math.random() * (max - min);
+
+function scheduleGlance(face, delay) {
+  face.timer = setTimeout(() => {
+    if (face.glance) {
+      face.glance = null;
+      scheduleGlance(face, randomBetween(1700, 4700));
+    } else {
+      const angle = randomBetween(0, 2 * Math.PI);
+      const reach = randomBetween(.6, 1);
+      face.glance = {x: 34 * reach * Math.cos(angle), y: 27 * reach * Math.sin(angle)};
+      scheduleGlance(face, randomBetween(650, 1500));
+    }
+    scheduleScene();
+  }, delay);
+}
+
+function resetGlances() {
+  const animate = allowMotion.matches && !document.hidden;
+  for (const face of faces) {
+    clearTimeout(face.timer);
+    face.glance = null;
+    if (animate) scheduleGlance(face, randomBetween(450, 3900));
+  }
+  scrollChanged = true;
+  scheduleScene();
+}
+
 function parallax() {
   const height = document.documentElement.clientHeight;
   const scrollRange = Math.max(1, document.documentElement.scrollHeight - height);
@@ -110,14 +138,25 @@ function updateScene() {
   frame = 0;
   if (scrollChanged && allowMotion.matches) parallax();
   scrollChanged = false;
-  if (!pointer) return;
-  for (const face of faces) {
-    const rect = face.getBoundingClientRect();
-    const dx = pointer.x - (rect.left + rect.width / 2);
-    const dy = pointer.y - (rect.top + rect.height / 2);
-    const distance = Math.max(72, Math.hypot(dx, dy));
-    face.style.setProperty('--look-x', (24 * dx / distance) + 'px');
-    face.style.setProperty('--look-y', (21 * dy / distance) + 'px');
+  const cursor = canTrack.matches && !document.hidden ? pointer : null;
+  const looks = faces.map(({element, glance}) => {
+    if (cursor) {
+      const rect = element.getBoundingClientRect();
+      const dx = cursor.x - (rect.left + rect.width / 2);
+      const dy = cursor.y - (rect.top + rect.height / 2);
+      const distance = Math.hypot(dx, dy);
+      if (distance < Math.max(128, rect.width * 2.1)) {
+        const scale = Math.max(72, distance);
+        return {x: 24 * dx / scale, y: 21 * dy / scale, tracking: true};
+      }
+    }
+    return {x: glance?.x ?? 0, y: glance?.y ?? 0, tracking: false};
+  });
+  for (const [index, {element}] of faces.entries()) {
+    const {x, y, tracking} = looks[index];
+    element.toggleAttribute('data-cursor-near', tracking);
+    element.style.setProperty('--look-x', x + 'px');
+    element.style.setProperty('--look-y', y + 'px');
   }
 }
 function scheduleScene() { if (!frame) frame = requestAnimationFrame(updateScene); }
@@ -125,12 +164,9 @@ function scheduleParallax() {
   scrollChanged = true;
   if (allowMotion.matches) scheduleScene();
 }
-function reset() {
+function clearPointer() {
   pointer = null;
-  for (const face of faces) {
-    face.style.removeProperty('--look-x');
-    face.style.removeProperty('--look-y');
-  }
+  scheduleScene();
 }
 document.addEventListener('pointermove', event => {
   if (!canTrack.matches || event.pointerType === 'touch') return;
@@ -141,7 +177,9 @@ document.addEventListener('scroll', scheduleParallax, {passive:true});
 window.addEventListener('resize', scheduleParallax);
 window.addEventListener('pageshow', scheduleParallax);
 new ResizeObserver(scheduleParallax).observe(document.body);
-allowMotion.addEventListener('change', scheduleParallax);
-document.documentElement.addEventListener('pointerleave', reset);
-window.addEventListener('blur', reset);
-canTrack.addEventListener('change', reset);
+allowMotion.addEventListener('change', resetGlances);
+document.addEventListener('visibilitychange', () => { clearPointer(); resetGlances(); });
+document.documentElement.addEventListener('pointerleave', clearPointer);
+window.addEventListener('blur', clearPointer);
+canTrack.addEventListener('change', clearPointer);
+resetGlances();

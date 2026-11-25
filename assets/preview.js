@@ -6,6 +6,12 @@ favorite.addEventListener('click', () => {
   favorite.querySelector('.favorite-count').textContent = selected ? '1' : '0';
 });
 
+const profileTrigger = document.querySelector('.profile-trigger');
+const profilePreview = document.getElementById(profileTrigger.getAttribute('aria-controls'));
+profileTrigger.disabled = false;
+profileTrigger.addEventListener('click', () => profilePreview.showModal());
+profilePreview.addEventListener('close', () => profileTrigger.focus({preventScroll:true}));
+
 const reaction = document.querySelector('.fire');
 const count = reaction.querySelector('.reaction-count');
 reaction.disabled = false;

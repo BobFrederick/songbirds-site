@@ -10,9 +10,9 @@
   <meta property="og:description" content="Bring Spotify into Rhino without losing your flow. See what’s playing beside your model, whether you’re listening solo or with your team.">
   <meta property="og:image" content="https://bobfrederick.github.io/songbirds-site/assets/bay-breasted-warbler.webp">
   <link rel="icon" type="image/svg+xml" href="./assets/bird.svg">
-  <link rel="stylesheet" href="./style.css?v=682e7ead1b">
+  <link rel="stylesheet" href="./style.css?v=99e65e6a5e">
   <script type="module" src="./assets/hero.js"></script>
-  <script type="module" src="./assets/preview.js?v=eae4103af3"></script>
+  <script type="module" src="./assets/preview.js?v=7a63d06de8"></script>
 </head>
 <body>
   <div class="artwork" aria-hidden="true">
@@ -39,7 +39,11 @@
       <div class="jam shell">
         <svg class="field-face surprised" viewBox="0 0 400 400" aria-hidden="true" focusable="false"><use href="./assets/faces.svg#surprised-base"></use><use class="expression" href="./assets/faces.svg#surprised-expression"></use></svg>
         <svg class="field-face laughing" viewBox="0 0 400 400" aria-hidden="true" focusable="false"><use href="./assets/faces.svg#laughing-base"></use><use class="expression" href="./assets/faces.svg#laughing-expression"></use></svg>
-        <div><h2 id="jam-heading">Listen together</h2><p>See who’s listening as you work and take turns picking the next song. When a teammate’s track comes on, send a reaction or save it for later.</p></div>
+        <div class="jam-copy">
+          <h2 id="jam-heading">Listen together</h2>
+          <p>See who’s listening as you work and take turns picking the next song. When a teammate’s track comes on, send a reaction or save it for later.</p>
+          <p>Search Spotify in Rhino, find what played in History, and save tracks to Favorites groups.</p>
+        </div>
         <figure class="player" aria-label="Example Jam in Songbirds">
           <div class="music-stage" aria-hidden="true">
             <img class="avatar-moving" src="./assets/finch.svg" width="58" height="58" alt="">
@@ -47,7 +51,7 @@
               <i style="--i:0"></i><i style="--i:1"></i><i style="--i:2"></i><i style="--i:3"></i><i style="--i:4"></i><i style="--i:5"></i><i style="--i:6"></i><i style="--i:7"></i><i style="--i:8"></i><i style="--i:9"></i><i style="--i:10"></i><i style="--i:11"></i><i style="--i:12"></i><i style="--i:13"></i><i style="--i:14"></i><i style="--i:15"></i><i style="--i:16"></i>
             </span>
           </div>
-          <p class="playback-caption"><strong>Bob</strong> is spinning:</p>
+          <p class="playback-caption"><strong>Lark</strong> is spinning:</p>
           <iframe class="track-preview" title="Spotify preview of Can U Get With by Delroy Edwards" src="https://open.spotify.com/embed/track/74vnXOwVeIZFEKUP6gFTco?theme=0" width="100%" height="80" loading="lazy" allow="encrypted-media; autoplay 'none'"></iframe>
           <div class="track-actions">
             <button class="reaction-pill favorite" type="button" aria-label="Favorite Can U Get With" aria-pressed="false" disabled>
@@ -72,8 +76,10 @@
               <div>
                 <dt>DJs</dt>
                 <dd>
-                  <img class="room-avatar avatar-moving" src="./assets/finch.svg" width="34" height="34" alt="">
-                  <span><strong>Bob</strong><small>Lv. 4 · 317 XP</small></span>
+                  <button class="profile-trigger" type="button" aria-label="Open Lark’s profile" aria-haspopup="dialog" aria-controls="lark-profile" disabled>
+                    <img class="room-avatar avatar-moving" src="./assets/finch.svg" width="34" height="34" alt="">
+                  </button>
+                  <span><strong>Lark</strong><small>Lv. 4 · 317 XP</small></span>
                 </dd>
                 <dd>
                   <svg class="room-avatar finch-ink" viewBox="0 0 400 400" aria-hidden="true"><use href="./assets/faces.svg#smirk-base"></use><use class="features" href="./assets/faces.svg#smirk-expression"></use></svg>
@@ -108,7 +114,7 @@
             </div>
             <div class="room" role="group" aria-label="Desk rotation">
               <svg class="room-avatar laughing-ink" viewBox="0 0 400 400" aria-hidden="true"><use href="./assets/faces.svg#laughing-base"></use><use class="features" href="./assets/faces.svg#laughing-expression"></use></svg>
-              <div class="room-info"><strong class="room-name">Desk rotation</strong><small>Bob · House</small><p>Can U Get With <span>· Delroy Edwards</span></p></div>
+              <div class="room-info"><strong class="room-name">Desk rotation</strong><small>Lark · House</small><p>Can U Get With <span>· Delroy Edwards</span></p></div>
               <button class="room-action" type="button" hidden>Join</button>
             </div>
         </div>
@@ -130,12 +136,49 @@
         <ol>
           <li>In Rhino, open <strong>Tools → Package Manager</strong> and select <strong>Online</strong>.</li>
           <li>Enable <strong>Include pre-releases</strong>, search for <code>songbird</code>, and click <strong>Install</strong>.</li>
-          <li>Restart Rhino, run <code>Songbird</code>, and connect Spotify. Choose <strong>Solo</strong> for your own music or enter a team invite under <strong>Team</strong> to listen together.</li>
+          <li>Restart Rhino, run <code>Songbird</code>, and connect Spotify. You can start in <strong>Solo</strong> and listen on your own.</li>
+          <li>To listen together, open <strong>Team</strong> and use your <strong>Songbirds team invite</strong> to connect to your team. A <strong>Spotify Jam invite</strong> opens a listening session in Spotify.</li>
         </ol>
         <details><summary>Can’t find Songbird?</summary><p>The office pilot uses a private package source. Ask your team owner for the source and setup instructions, then reopen Package Manager and search again.</p></details>
+        <p class="tour-tip">Replay the guided tour anytime from <strong>Settings → About → Take the tour</strong>.</p>
       </div>
     </section>
   </main>
+  <dialog id="lark-profile" class="profile-preview" aria-labelledby="lark-name">
+    <form method="dialog">
+      <button class="profile-close" type="submit" aria-label="Close profile" autofocus>
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="m4 4 8 8m0-8-8 8"/></svg>
+      </button>
+    </form>
+    <div class="profile-face avatar-moving">
+      <img src="./assets/finch.svg" width="74" height="74" alt="">
+      <span class="profile-presence" role="img" aria-label="Available" title="Available"></span>
+    </div>
+    <h2 id="lark-name">Lark</h2>
+    <div class="profile-details">
+      <p>Level 4 · 317 XP</p>
+      <p><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20 10c0 5-8 11-8 11S4 15 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/></svg> Portland, OR</p>
+      <p>Designing</p>
+    </div>
+    <section class="profile-section" aria-labelledby="lark-about">
+      <h3 id="lark-about">About</h3>
+      <p>I keep a running list of house records to design to.</p>
+    </section>
+    <section class="profile-section" aria-labelledby="lark-connections">
+      <h3 id="lark-connections">Connections</h3>
+      <div class="profile-connections">
+        <span class="profile-connection" role="img" aria-label="Microsoft Teams" title="Microsoft Teams">
+          <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="16" cy="6" r="3.4" fill="currentColor"/><circle cx="21" cy="8" r="2" fill="currentColor" opacity=".7"/>
+            <path d="M10 10h10v6a5 5 0 0 1-10 0zm10 1h3v4a3 3 0 0 1-3 3" fill="currentColor" opacity=".8"/>
+            <rect x="1" y="6" width="13" height="13" rx="2" fill="#18181d" stroke="currentColor"/>
+            <path d="M4 9h7v1.5H8.3v5.6H6.7v-5.6H4z" fill="currentColor"/>
+          </svg>
+        </span>
+        <span class="profile-connection" title="Spotify connected"><img src="./assets/spotify-icon.svg" alt="Spotify connected" width="18" height="18"></span>
+      </div>
+    </section>
+  </dialog>
   <footer class="shell"><span class="brand"><img src="./assets/bird.svg" width="24" height="24" alt="">Songbirds</span><p>Robert Havell Jr. after John James Audubon.<br><a href="https://www.metmuseum.org/art/collection/search/918293">Bay-breasted Warbler, The Met · Public domain</a></p></footer>
 </body>
 </html>
